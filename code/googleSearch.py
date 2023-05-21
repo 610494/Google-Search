@@ -2,6 +2,7 @@ from parserSearchResult import GetParagraphFromLinks
 from googleAPI import Search
 from collections import OrderedDict
 import json
+import os
 from preprocessing import dealEnglishData
 from faq import tfidf
 import math
@@ -9,8 +10,14 @@ import math
 
 def GetParagraphList(question):
     question = question.replace('"', "'")
-    TruthfulListPath = "../data/TruthfulQAQuestionList.json"
-    TruthfulPagaPath = "../data/TruthfulQAGoogleSearchResult.json"
+    current_dir = os.path.dirname(__file__)
+
+    TruthfulListPath = os.path.join(
+        current_dir, '..', 'data', 'TruthfulQAQuestionList.json')
+    TruthfulPagaPath = os.path.join(
+        current_dir, '..', 'data', 'TruthfulQAGoogleSearchResult.json')
+    # TruthfulListPath = "../data/TruthfulQAQuestionList.json"
+    # TruthfulPagaPath = "../data/TruthfulQAGoogleSearchResult.json"
     MAXToken = 150
 
     with open(TruthfulListPath) as f:
@@ -43,8 +50,14 @@ def GetParagraphList(question):
 def GetParagraph(question, k):
     paragraphList = GetParagraphList(question)
     question = question.replace('"', "'")
-    TFIDFDataPath = "../data/TFIDFDataPath.json"
-    TFIDFembeddingPath = "../data/TFIDFembeddingPath.json"
+    current_dir = os.path.dirname(__file__)
+
+    TFIDFDataPath = os.path.join(
+        current_dir, '..', 'data', 'TFIDFDataPath.json')
+    # TFIDFDataPath = "../data/TFIDFDataPath.json"
+    TFIDFembeddingPath = os.path.join(
+        current_dir, '..', 'data', 'TFIDFembeddingPath.json')
+    # TFIDFembeddingPath = "../data/TFIDFembeddingPath.json"
 
     isFirst = True
     num = 0

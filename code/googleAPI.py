@@ -2,6 +2,7 @@ import requests
 import time
 import random
 import json
+import os
 from fake_useragent import UserAgent
 
 ip_pool = [
@@ -42,7 +43,11 @@ def Search(question):
 
     APIKeyList = []
     searchEngineID = " "
-    googleAPISetting = "../data/googleAPI.json"
+    current_dir = os.path.dirname(__file__)
+
+    googleAPISetting = os.path.join(
+        current_dir, '..', 'data', 'googleAPI.json')
+    # googleAPISetting = "../data/googleAPI.json"
     with open(googleAPISetting, "r") as googleAPI:
         APISetting = json.load(googleAPI)
         APIKeyList = APISetting["APIKeyList"]
